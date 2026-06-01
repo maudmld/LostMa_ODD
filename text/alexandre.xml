@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="/Users/maudmelinand/Desktop/LostMa-divers/LostMa_ODD/out/text.rng" 
+<?xml-model href=xmlns="http://www.tei-c.org/ns/1.0"
    type="application/xml" 
    schematypens="http://relaxng.org/ns/structure/1.0"?>
 
 
+<!--"/Users/maudmelinand/Desktop/LostMa-divers/LostMa_ODD/out/text.rng"-->
 <!-- Questions pour JBC 
       1) Où mettre les stemmata ? Solution 1 = body/graph mais body n'est pas fait pour comporter de métadonnées
                                   Solutuion 2 = TEI/standOff/graph 
       2) A priori pas de code BCP47 pour les langues qu'on utilise : est-ce qu'on les indexe dans classDecl/taxonomy ? 
       Marche bien et prévu pour mais verbeux (alourdit les fichiers)
       
-      3) Info relatives aux verse type, rhyme type, stanza type - à vérifier 
+      3) Info relatives aux verse type, rhyme type, stanza type - à vérifier -->
+      
+      <!-- pour le xml:id des textes, on va utiliser le préfixe hid_03849-->
 
---> 
 <TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="alexandre_test">
    <teiHeader>
       <fileDesc>
@@ -52,7 +54,12 @@
             <p>Cette publication est un test de conformité de l'ODD text.</p>
          </publicationStmt>
          <sourceDesc>
-            <p>Information about the source</p>
+            <p>
+            <listWit>
+               <witness xml:id="athis_2">"Athis et Prophilias" (1201 to 1300) p, in ms Latin 16433</witness>
+               <witness xml:id="athis_3">"Athis et Prophilias" (1201 to 1300) p, in ms Latin 16433</witness>
+            </listWit>
+            </p>
          </sourceDesc>
       </fileDesc>
       <encodingDesc>
@@ -105,8 +112,6 @@
                   <desc>The litterary form of the text is unknown.</desc>
                </category>
             </taxonomy>
-            <!-- Utilisation de l'élément taxonomy qui permet de contourner le problème que pose metDecl (qui s'applique canoniquement
-            aux données et pas aux métadonnées seulement. -->
             <taxonomy xml:id="versification">
                <category xml:id="alexandrine"/>
                <category xml:id="decasyllabe"/>
@@ -127,8 +132,8 @@
                <category xml:id="laisse"/>
             </taxonomy>
          </classDecl>
-         <!--<metDecl type="met"> <!-\- A priori pas conforme et pas adapté au fait qu'on ai pas de 
-                                          données et seulement des métadonnées-\-> 
+         <!--<metDecl type="met"> <!-\- c'est intéressant de les avoir pour pouvoir intégrer d'autres fichiers : aller voir le 
+            repo chrestien pour trouve : aspect prospectif intéressant -\-> 
             <metSym value="alexandrine"/>
             <metSym value="decasyllabe"/>
             <metSym value="hexasyllabe"/>
@@ -150,21 +155,14 @@
       </encodingDesc>
       <profileDesc>
          <langUsage>
-            <language ident="fro">fro (Old French)
-            <!-- language renvoie à l'attribut text_language (donc général au texte au niveau le plus haut) // -->
-               <lang>pic., fro (Old French)</lang>
-               <!-- renvoie à regional_writing_style_name mais pas très clair non plus -->
-               <note type="scripta">pic. (Tournai?) mil. 13es.</note>  
-               <!-- BCP 47 permet d'encoder des variantes régionales via des sous-tags :
-               xml<language ident="fro-x-picard">fro (Old French), scripta picarde</language>
-                sous-tag x- est la zone privée de BCP 47 : standard mais + précis pour une scripta -->
+            <language ident="fro">fro (Old French) <!-- language renvoie à l'attribut text_language  -->
+               <lang n="region">pic., fro (Old French)</lang> <!-- lang + @n renvoie à l'attribut regional_writing_style  -->
+               <lang n="scripta">pic. (Tournai?) mil. 13es.</lang> <!-- lang + @n renvoie à l'attribut scripta_freetext  -->
               </language>
          </langUsage>
          <creation>
-            <!-- La seule erreur qui sort lorsqu'on passe de l'ODD à la TEI All est la valeur de @cert (qui ne prend que high/low/medium)
-               dans la TEI canonique donc modif des données (very-likely devient high) -->
             <date from="1165" to="1200" cert="high" source="Arlima">Vers 1170</date>
-            <!-- est-ce qu'on rajoute une source pour placeName ? Dans le data model mais pas dans la release-->
+            <!-- modifier le pointer pour la source revoir les guidelines : sinon on change et on le fait avec bibl -->
             <placeName source="Arlima">Tournai</placeName>
          </creation>
          <textClass>
@@ -180,10 +178,10 @@
             <catRef scheme="#stanza" target="monoryhme"/>
          </textClass>
          <textDesc>
-            <channel/>
+            <channel>manuscript</channel>
             <constitution>fragmentary</constitution>
-            <derivation corresp="496">might derive from a lost Robert de Boron verse text</derivation>
-            <!-- utilisation de @corresp pour renvoyer au H-ID du texte lié -->
+            <derivation corresp="athis_2">might derive from a lost Robert de Boron verse text</derivation>
+            <!-- utilisation de @corresp pour renvoyer à l'xml:id  texte lié -->
             <domain/>
             <factuality/>
             <interaction/>
