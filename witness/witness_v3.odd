@@ -55,6 +55,8 @@
             listOrg org persName forename surname"/>
           
           <moduleRef key="linking"/>
+          
+          <moduleRef key="dictionaries"/>
 
           <!-- Quelques commentaires généraux : -->
           <!-- tous les éléments sont déclarés via elementSpec même quand leur usage ne change pas de la TEI classique pour les besoins de la documentation -->
@@ -162,33 +164,51 @@
 
           <!-- langUsage -->
 
-          <elementSpec ident="langUsage" mode="change" module="header">
-            <desc>The element langUsage must receive a child-element language.</desc>
+          <elementSpec ident="langUsage" mode="change">
+            <desc>The element takes at least one child language.</desc>
             <content>
               <elementRef key="language" minOccurs="1" maxOccurs="unbounded"/>
             </content>
           </elementSpec>
-
+          
           <!-- language -->
-
-          <elementSpec ident="language" mode="change" module="header">
+          
+          <elementSpec ident="language" mode="change">
+            <desc>The element language is used to receive an @ident, a textnode and child element lang.</desc>
             <content>
-              <textNode/>
+              <sequence>
+                <textNode/>
+                <elementRef key="lang" minOccurs="0" maxOccurs="unbounded"/>
+              </sequence>
             </content>
             <attList>
-              <attDef ident="ident" mode="change" usage="req">
-                <desc>The attribute ident receives the Heurist ID from the DB's witness_regional_writing_style_H-ID.</desc>
+              <attDef ident="ident" mode="change" usage="rec">
                 <datatype>
                   <dataRef name="string"/>
                 </datatype>
               </attDef>
             </attList>
-            <remarks>
-              <p>The @ident corresponds to the possible values of the DB's attribute witness_regional_writing_style_H-ID.</p>
-              <p>The textNode as a child of language allows to input witness_scripta_freetext.</p>
-            </remarks>
           </elementSpec>
-
+          
+          <!-- lang -->
+          
+          <elementSpec ident="lang" mode="change">
+            <desc>The element lang takes a @n allowing two values : regional and scripta.</desc>
+            <content>
+              <textNode/>
+            </content>
+            <attList>
+              <attDef ident="n" mode="change" usage="opt">
+                <valList type="closed">
+                  <valItem ident="regional"/>
+                  <valItem ident="scripta"/>
+                </valList>
+              </attDef>
+            </attList>
+            <remarks> 
+              <p>The value regional is used for Witness_regional_writing_style Name, and the value scripta takes the value of Witness_scripta_freetext.</p></remarks>
+          </elementSpec>
+          
           <!-- creation -->
 
           <elementSpec ident="creation" mode="change" module="header">

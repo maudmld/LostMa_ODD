@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="/Users/maudmelinand/Desktop/LostMa-divers/LostMa_ODD/out/witness_v3.rng" 
+<?xml-model href="/Users/maudmelinand/Desktop/LostMa-divers/LostMa_ODD/witness/out/witness_v3.rng" 
             type="application/xml" 
             schematypens="http://relaxng.org/ns/structure/1.0"?>
 
@@ -81,7 +81,7 @@
                   </physDesc>
                   <msContents>
                      <msItemStruct>
-                        <locus from="12" to="23">Renvoie au w_observed_on_pages</locus>
+                        <locus from="12" to="23">Renvoie à part_page_ranges.</locus>
                         <author>Chrétien de Troyes</author>
                         <title>Le chevalier au lion</title>
                         <note></note>
@@ -117,7 +117,10 @@
       </encodingDesc>
       <profileDesc>
          <langUsage>
-            <language ident="fro-orient-bourg">bourg., fro (Old French)</language>
+            <language ident="fro-orient-bourg">
+               <lang n="regional">Vlaams, dum (Middle Dutch)</lang>
+               <lang n="scripta">frc.: Paris -- Paris prob. 1318 -- Source: DÉAF</lang>
+            </language> 
          </langUsage>
          <creation>
             <date notBefore="1201" notAfter="1300" source="Jonas" cert="unknown">XIIIe siècle</date>
