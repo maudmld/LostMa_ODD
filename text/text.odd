@@ -50,11 +50,13 @@
           <moduleRef key="dictionaries"/>
           
           <moduleRef key="nets"/>
+          
+          <moduleRef key="textcrit"/>
          
          <!-- TEI racine --> 
           
          <elementSpec ident="TEI" mode="change">
-           <desc></desc>
+           <desc>The TEI element takes two children, teiHeader and text. One @xml:id is required.</desc>
            <content>
              <sequence>
                <elementRef key="teiHeader"/>
@@ -68,14 +70,19 @@
                </datatype>
              </attDef>
            </attList>
+           <remarks>
+             <p>The xml:id is required in order to comply to DoTS's specifications. Its structure must always be hid_123 (equivalent to the Heurist ID).</p>
+           </remarks>
          </elementSpec>
           
+          <!-- Elements à rajouter : listWit / witness - listBibl / bibl -->
           
           <!-- Module header -->
           
           <!-- teiHeader -->
           
           <elementSpec ident="teiHeader" mode="change">
+            <desc>teiHeader takes only three children : fileDesc, encodingDesc and profileDesc.</desc>
             <content>
               <sequence>
                 <elementRef key="fileDesc"/>
@@ -88,7 +95,7 @@
           <!-- fileDesc -->
           
           <elementSpec ident="fileDesc" mode="change">
-            <desc>The element fileDesc accepts only titleStmt, publicationStmt and sourceDesc (optional) as child elements.</desc>
+            <desc>The element fileDesc accepts only titleStmt, publicationStmt (optional) and sourceDesc as child elements.</desc>
             <content>
               <sequence>
                 <elementRef key="titleStmt" minOccurs="1" maxOccurs="1"/>
@@ -101,7 +108,7 @@
           <!-- titleStmt -->
           
           <elementSpec ident="titleStmt" mode="change">
-            <desc>The element titleStmt takes a required child-element title.</desc>
+            <desc>The element titleStmt takes a required children-elements title, principal and respStmt.</desc>
             <content>
               <sequence>
                 <elementRef key="title" minOccurs="1" maxOccurs="unbounded"/>
@@ -112,6 +119,22 @@
             <remarks>
               <p>Title is required in order to comply to DoTS's requirements.</p>
             </remarks>
+          </elementSpec>
+          
+          <!-- title -->
+          
+          <elementSpec ident="title" mode="change">
+            <desc>The element title takes an @type preferred and a textnode.</desc>
+            <content>
+              <textNode/>
+            </content>
+            <attList>
+              <attDef ident="type" mode="change" usage="rec">
+                <datatype>
+                  <dataRef name="string"/>
+                </datatype>
+              </attDef>
+            </attList>
           </elementSpec>
           
           <!-- principal -->
@@ -171,7 +194,7 @@
           <!-- taxonomy -->
           
           <elementSpec ident="taxonomy" mode="change">
-            <desc></desc>
+            <desc>The element takes a child element category, and have a required @xml:id in order to qualify its content.</desc>
             <content>
               <elementRef key="category" minOccurs="1" maxOccurs="unbounded"/>
             </content>
@@ -182,12 +205,16 @@
                 </datatype>
               </attDef>
             </attList>
+            <remarks>
+              <p>The element taxonomy is used in order to deal with a few categories that doesn't translate canonically in TEI.</p>
+              <p>Multiples types are used in these files : genre, litterary forme, versification, rhymes and stanza.</p>
+            </remarks>
           </elementSpec>
           
           <!-- category -->
           
           <elementSpec ident="category" mode="change">
-          <desc></desc>
+          <desc>Category takes child element desc and has a required @xml:id in order to qualify its content.</desc>
           <content>
             <elementRef key="desc" minOccurs="0" maxOccurs="unbounded"/>
           </content>
@@ -216,10 +243,11 @@
           <!-- profileDesc -->
           
           <elementSpec ident="profileDesc" mode="change">
-            <desc></desc>
+            <desc>profileDesc is used to describe non-bibliographical aspects of the text. It takes children elements langUsage, creation, textClass, 
+            textDesc and particDesc.</desc>
             <content>
              <sequence>
-              <elementRef key="langUsage" minOccurs="1" maxOccurs="unbounded"/>
+              <elementRef key="langUsage" minOccurs="0" maxOccurs="unbounded"/>
                <elementRef key="creation" minOccurs="0" maxOccurs="unbounded"/>
                <elementRef key="textClass" minOccurs="0" maxOccurs="unbounded"/>
                <elementRef key="textDesc" minOccurs="0" maxOccurs="unbounded"/>
@@ -227,23 +255,23 @@
               </sequence>
             </content>
             <remarks>
-              <p></p>
+              <p>All those elements are set on optional mode in order to deal with the possible nulls.</p>
             </remarks>
           </elementSpec>
           
           <!-- langUsage -->
           
           <elementSpec ident="langUsage" mode="change">
-            <desc></desc>
+            <desc>Describes in general the language used in a text. It takes language as a child, but is optional in case of nulls. </desc>
             <content>
-              <elementRef key="language" minOccurs="1" maxOccurs="unbounded"/>
+              <elementRef key="language" minOccurs="0" maxOccurs="unbounded"/>
             </content>
           </elementSpec>
           
           <!-- language -->
           
           <elementSpec ident="language" mode="change">
-            <desc></desc>
+            <desc>Language describes the language used in a text. It takes two optional children : lang and note. @ident is recommended in case of not null.</desc>
             <content>
              <sequence>
               <textNode/>
@@ -258,39 +286,47 @@
               </datatype>
             </attDef>
             </attList>
+            <remarks>
+              <p>Allow the input of DB's attribute text_language</p>
+            </remarks>
           </elementSpec>
           
           <!-- lang -->
           
           <elementSpec ident="lang" mode="change">
+            <desc>Element lang stores the name of the language. It takes an @n to specify if the data is for regional language or scripta.</desc>
             <content>
               <textNode/>
             </content>
             <attList>
-              <attDef ident="type" mode="change" usage="opt">
+              <attDef ident="n" mode="change" usage="opt">
                 <valList type="closed">
                   <valItem ident="regional"/>
+                  <valItem ident="scripta"/>
                 </valList>
               </attDef>
             </attList>
+            <remarks>
+              <p>Allow the input of DB's attribute regional_writing_style (for @n=regional) and scripta_freetext (for @n=scripta)</p>
+            </remarks>
           </elementSpec>
           
           <!-- creation -->
           
           <elementSpec ident="creation" mode="change">
-            <desc></desc>
+            <desc>Element that describes the date and place of creation of the text. MinOccurs=0 in order to deal with nulls or unknown.</desc>
             <content>
-             <sequence>
-              <elementRef key="date" minOccurs="1" maxOccurs="unbounded"/>
-              <elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/>
-             </sequence>
+              <sequence>
+                <elementRef key="date" minOccurs="0" maxOccurs="1"/>
+                <elementRef key="placeName" minOccurs="0" maxOccurs="1"/>
+              </sequence>
             </content>
           </elementSpec>
           
           <!-- date -->
           
           <elementSpec ident="date" mode="change">
-            <desc></desc>
+            <desc>The element date takes a textnode and four attributes : from, to, source and cert.</desc>
             <content>
               <textNode/>
             </content>
@@ -318,18 +354,47 @@
                 </valList>
               </attDef>
             </attList>
+            <remarks>
+              <p>The element allows to input the DB's attribute TextTable_date_of_creation in @from and @to.</p>
+              <p>It also takes DB's TextTable_date_of_creation_certainty in the @cert.</p>
+              <p>It also takes DB's TextTable_date_of_creation_source in the @source.</p>
+              <p>It also takes DB's TextTable_date_freetext in the textnode.</p>
+            </remarks>
           </elementSpec>
+          
+          <!-- placeName -->
+          
+          <elementSpec ident="placeName" mode="change">
+            <desc>Element that describes the place of creation of the text. MinOccurs=0 in order to deal with nulls or unknown.</desc>
+            <content>
+              <textNode/>
+            </content>
+            <attList>
+              <attDef ident="source" mode="change" usage="opt">
+                 <datatype>
+                   <dataRef key="teidata.pointer"/>
+                 </datatype>
+              </attDef>
+            </attList>
+            <remarks>
+              <p>This element is absent from the release but exists in the Heurist modeL.</p>
+            </remarks>
+          </elementSpec>
+          
           
           <!-- textClass -->
           
           <elementSpec ident="textClass" mode="change">
-            <desc></desc>
+            <desc>Describes aspects of the nature of a text.</desc>
             <content>
               <sequence>
                 <elementRef key="keywords" minOccurs="0" maxOccurs="unbounded"/>
                 <elementRef key="catRef" minOccurs="0" maxOccurs="unbounded"/>
               </sequence>
             </content>
+            <remarks>
+              <p>textClass is used to display the data declared in taxonomy : genre, literary form, versification, rhyme, stanza.</p>
+            </remarks>
           </elementSpec>
           
           <!-- keyword -->
@@ -344,24 +409,27 @@
           <!-- catRef -->
           
           <elementSpec ident="catRef" mode="change">
-            <desc></desc>
+            <desc>catRef element takes two @scheme and @target both from closed valList declared in taxonomy.</desc>
             <content>
               <textNode/>
             </content>
             <attList>
               <attDef ident="scheme" mode="change" usage="opt">
-                <desc></desc>
+                <desc>scheme refers to taxonomy xml:id element.</desc>
               </attDef>
               <attDef ident="target" mode="change" usage="opt">
-                <desc></desc>
+                <desc>target refers to category xml:id element.</desc>
               </attDef>
             </attList>
+            <remarks>
+              <p>element catRef and @ allow to encode TextTable_literary_form, TextTable_verse_type, TextTable_rhyme_type, TextTable_stanza_type.</p>
+            </remarks>
           </elementSpec>
           
           <!-- textDesc -->
           
           <elementSpec ident="textDesc" mode="change">
-            <desc></desc>
+            <desc>Contains a description of a text.</desc>
             <content>
               <sequence>
                 <elementRef key="channel" minOccurs="0" maxOccurs="1"/>
@@ -374,6 +442,33 @@
                 <elementRef key="purpose" minOccurs="0" maxOccurs="1"/>
               </sequence>
             </content>
+            <remarks>
+              <p>Only the element channel, constitution and derivation are used but the rest is kept in order to 
+                be TEI's guidelines compliant.</p>
+              <p>Channel element stores ??</p>
+              <p>Constitutions stores the DB's Witness_status_witness.</p>
+              <p>Derivation stores the DB's TextTable_is_derived_from H-ID and TextTable_nature_of_derivations.</p>
+            </remarks>
+          </elementSpec>
+          
+          <!-- Derivation --> 
+          
+          <elementSpec ident="derivation" mode="change">
+            <desc>Describes the textual derivation of a text.</desc>
+            <content>
+              <textNode/>
+            </content>
+            <attList>
+              <attDef ident="corresp" mode="change" usage="opt">
+                <datatype>
+                  <dataRef key="teidata.pointer"/>
+                </datatype>
+              </attDef>
+            </attList>
+            <remarks>
+              <p>The derivation element stores a textnode to receive TextTable_nature_of_derivations and the 
+                @corresp receives TextTable_is_derived_from H-ID, and points to another text xml:id (hid_123 format).</p>
+            </remarks>
           </elementSpec>
           
           <!-- particDesc -->

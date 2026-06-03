@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href=xmlns="http://www.tei-c.org/ns/1.0"
+<?xml-model href=xmlns="/Users/maudmelinand/Desktop/LostMa-divers/LostMa_ODD/out/text.rng"
    type="application/xml" 
    schematypens="http://relaxng.org/ns/structure/1.0"?>
 
@@ -15,12 +15,11 @@
       
       <!-- pour le xml:id des textes, on va utiliser le préfixe hid_03849-->
 
-<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="alexandre_test">
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="hid_03849">
    <teiHeader>
       <fileDesc>
          <titleStmt>
-            <title type="forged">[fragmentary] fro (Old French) Lambert le Tort, "Alexandre en Orient" (verse alexandrine full rhyme, 1165 to 1200)</title>
-            <title type="preferred">Alexandre en Orient</title>
+            <title type="preferred">[fragmentary] fro (Old French) Lambert le Tort, "Alexandre en Orient" (verse alexandrine full rhyme, 1165 to 1200)</title>
             <!-- ajout de l'Heurist ID pour le text dans @key mais à voir si on le met ailleurs ?  -->
             <principal>
                <persName>
@@ -28,7 +27,7 @@
                   <surname>Camps</surname>
                </persName>
             </principal>
-            <respStmt>
+            <respStmt>  <!-- rien de tout ça n'est mappé car métadonnées Heurist qui ne sont pas dans la BDD - trouver comment les récupérer  -->
                <resp>Editor of the French corpus</resp>
                <persName xml:id="JBC">
                   <forename>Jean-Baptiste</forename>
@@ -50,20 +49,22 @@
                </persName>
             </respStmt>
          </titleStmt>
-         <publicationStmt>
+         <publicationStmt> <!-- pas d'intérêt à conserver -->
             <p>Cette publication est un test de conformité de l'ODD text.</p>
          </publicationStmt>
          <sourceDesc>
             <p>
-            <listWit>
+               <listWit> <!-- pas mappé car impossible de trouver ces données dans la BDD ? est-ce du côté du stemma ? -->
                <witness xml:id="athis_2">"Athis et Prophilias" (1201 to 1300) p, in ms Latin 16433</witness>
                <witness xml:id="athis_3">"Athis et Prophilias" (1201 to 1300) p, in ms Latin 16433</witness>
             </listWit>
+            <listBibl>
+               <bibl xml:id="Arlima">Archives de littérature du Moyen Âge.</bibl>
+            </listBibl>
             </p>
          </sourceDesc>
       </fileDesc>
       <encodingDesc>
-         <!-- pas de meilleure solution pour le moment mais à voir si c'est pas mieux de l'encoder dans l'ODD -->
          <classDecl>
             <taxonomy xml:id="genre">
                <category xml:id="arthurian-romance">
@@ -161,8 +162,8 @@
               </language>
          </langUsage>
          <creation>
-            <date from="1165" to="1200" cert="high" source="Arlima">Vers 1170</date>
-            <!-- modifier le pointer pour la source revoir les guidelines : sinon on change et on le fait avec bibl -->
+            <date from="1165" to="1200" cert="high" source="#Arlima">Vers 1170</date>
+            <!-- Faut-il créer une liste de valeurs pour les sources et les déclarer dans listBibl ? -->x
             <placeName source="Arlima">Tournai</placeName>
          </creation>
          <textClass>
