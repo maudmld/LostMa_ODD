@@ -24,7 +24,7 @@
 
       <div>
         <schemaSpec ident="test_lostma_witness" start="TEI">
-
+ 
           <!-- Modules utilisés -->
 
           <moduleRef key="tei"/>
@@ -86,6 +86,9 @@
                 </datatype>
               </attDef>
             </attList>
+            <remarks>
+              <p>The @xml:id is required in order to comply to DoTS's requirements.</p>
+            </remarks>
           </elementSpec>
           
           
@@ -120,6 +123,25 @@
             </remarks>
           </elementSpec>
           
+<!--          <!-\- title -\->
+          
+          <elementSpec ident="title" mode="change">
+            <desc>The element title takes an @type.</desc>
+            <content>
+              <textNode/>
+            </content>
+            <attList>
+              <attDef ident="type" mode="change" usage="rec">
+                <valList type="closed">
+                  <valItem ident="preferred"/>
+                </valList>
+              </attDef>
+            </attList>
+            <remarks>
+              <p>The element title stores the DB's data for witness's name </p>
+            </remarks>
+          </elementSpec> -->
+          
           <!-- principal -->
           
           <elementSpec ident="principal" mode="change">
@@ -127,6 +149,9 @@
             <content>
               <elementRef key="persName" minOccurs="1" maxOccurs="1"/>
             </content>
+            <remarks>
+              <p>It receives metadata from Heurist - extraction to be determined, not in the DB yet.</p>
+            </remarks>
           </elementSpec>
           
           <!-- persName -->
@@ -139,6 +164,9 @@
                <elementRef key="surname" minOccurs="1" maxOccurs="1"/>
               </sequence>
             </content>
+            <remarks>
+              <p>It receives metadata from Heurist - extraction to be determined, not in the DB yet.</p>
+            </remarks>
           </elementSpec>
           
           <!-- respStmt -->
@@ -151,6 +179,9 @@
                 <elementRef key="persName" minOccurs="1" maxOccurs="unbounded"/>
               </sequence>
             </content>
+            <remarks>
+              <p>It receives metadata from Heurist - extraction to be determined, not in the DB yet.</p>
+            </remarks>
           </elementSpec>
           
           <!-- sourceDesc -->
@@ -188,6 +219,10 @@
                 </datatype>
               </attDef>
             </attList>
+            <remarks>
+              <p>The @ident for language receives the DB's attribute Witness_regional_writing_style Name but only the three-letters 
+                unicode between the coma and the open parenthesis.</p>
+            </remarks>
           </elementSpec>
           
           <!-- lang -->
@@ -206,7 +241,8 @@
               </attDef>
             </attList>
             <remarks> 
-              <p>The value regional is used for Witness_regional_writing_style Name, and the value scripta takes the value of Witness_scripta_freetext.</p></remarks>
+              <p>The value regional is used for the whole string contained by the DB's Witness_regional_writing_style Name, and the value 
+                scripta takes the value of the DB's Witness_scripta_freetext.</p></remarks>
           </elementSpec>
           
           <!-- creation -->
@@ -227,11 +263,9 @@
            </content>
             <attList>
               <attDef ident="when" mode="change" usage="opt">
-                <desc>The date is expressed with YYYY or YYYY - YYYY format.</desc>
                 <datatype>
                   <dataRef name="string"/>
                 </datatype>
-                <!-- Ici pas certaine que ça prenne aucune idée de comment contraindre un format de date - idée de Claude -->
               </attDef>
               <attDef ident="source" mode="change" usage="opt"/>
               <attDef ident="certainty" mode="add" usage="opt">
@@ -256,8 +290,9 @@
               </attDef>
             </attList>
             <remarks>
-              <p>The element date and the attribute certainty are equivalent to the DB's attributes witness_date_of_creation
-                and witness_date_of_creation_certainty.</p>
+              <p>The element date stores the DB's attributes Witness_date_of_creation.</p>
+              <p>The @certainty stores the DB's attribute Witness_date_of_creation_certainty.</p>
+              <p>The @source stores the DB's attribute Witness_date_of_creation_source. </p>
             </remarks>
           </elementSpec>
 
@@ -280,12 +315,12 @@
                 </valList>
               </attDef>
             </attList>
+            <remarks>
+              <p>The element idno when combined with the @type="heurist" stores the DB's Witness_H-ID.</p>
+              <p>The element idno when combined with the @type="shelfmark" stores the DB's DocumentTable_current_shelfmark.</p>
+            </remarks>
           </elementSpec>
-          
-          
-        
-
-
+         
           <!-- module msDescription  -->
 
 
@@ -331,7 +366,7 @@
             </attList>
             <remarks>
               <p>The status of the witness is indicated via the @type in the msDesc element, which describes the witness. The closed list refers to the data from 
-                DB's witness_status_witness, and the "unknown" choice has been added in order to deal with the possible nulls. </p>
+                DB's Witness_status_witness, and the "unknown" choice has been added in order to deal with the possible nulls. </p>
             </remarks>
           </elementSpec>
           
@@ -348,7 +383,7 @@
               </attDef>
             </attList>
             <remarks>
-              <p>This type receives the data from witness_status_note.</p>
+              <p>This type receives the data from Witness_status_note.</p>
             </remarks>
           </elementSpec>
           
@@ -367,7 +402,7 @@
             </content>
             <remarks>
               <p>The idno element must be declared for each msIdentifier in order to input 
-                the Heurist ID of each witness. The collection element is optional and allows 
+                the Heurist ID of each witness (as stored in the DB's Witness_H-ID). The collection element is optional and allows 
                 either a child element location or a textual node.</p>
             </remarks>
           </elementSpec>
@@ -391,6 +426,9 @@
                 </valList>
               </attDef>
             </attList>
+            <remarks>
+              <p>The altIdentifier + @type="old-shelfmark" stores the DocumentTable_old_shelfmark when not null.</p>
+            </remarks>
           </elementSpec>
 
           <!-- repository -->
@@ -412,25 +450,23 @@
                 </valList>
                 <remarks>
                   <p>Allows to specify the type of repository's name, equivalent to the database attributes
-                    "repo_preferred_name" and "repo_label_name".</p>
+                    Repo_preferred_name and Repo_label_name.</p>
                 </remarks>
               </attDef>
               <attDef ident="heurist_id" mode="add" usage="opt">
-                <desc>Allows to input the Heurist ID of the repository.</desc>
                 <datatype>
                   <dataRef name="string"/>
                 </datatype>
                 <remarks>
-                  <p>Equivalent to the database attribute repository_H-ID.</p>
+                  <p>Equivalent to the database attribute Repository_H-ID.</p>
                 </remarks>
               </attDef>
               <attDef ident="viaf" mode="add" usage="opt">
-                <desc>Allows to input the VIAF number of the repository.</desc>
                 <datatype>
                   <dataRef name="string"/>
                 </datatype>
                 <remarks>
-                  <p>Equivalent to the database attribute repository_VIAF.</p>
+                  <p>Equivalent to the database attribute Repository_VIAF.</p>
                 </remarks>
               </attDef>
             </attList>
@@ -449,9 +485,6 @@
             </content>
             <attList>
               <attDef ident="type" mode="change">
-                <desc>The attribute type is used to declare wether the document is a collection of fragments or not. The closed list is 
-                equivalent to the data of the DB's document_table_collection_of_fragments.
-                </desc>
                 <datatype>
                   <dataRef name="token"/>
                 </datatype>
@@ -468,6 +501,10 @@
                 </valList>
               </attDef>
             </attList>
+            <remarks>
+              <p>The attribute type is used to declare wether the document is a collection of fragments or not. The closed list is 
+                equivalent to the data of the DB's Document_table_collection_of_fragments.</p>
+            </remarks>
           </elementSpec>
           
           <!-- location -->
@@ -487,7 +524,8 @@
               </attDef>
             </attList>
             <remarks>
-              <p>The use of the attribute @known is recommended but not required in order to deal with a few nulls from the dataset.</p>
+              <p>The @known stores the DB's data from DocumentTable_location_known.
+                The use of the attribute @known is recommended but not required in order to deal with a few nulls from the dataset.</p>
             </remarks>
           </elementSpec>
           
@@ -495,8 +533,7 @@
           
           
           <elementSpec ident="msFrag" mode="change">
-            <desc>msFrag describes a part of the witness hosted in a 
-              specific manuscript.</desc>
+            <desc>msFrag describes a part of the witness hosted in a specific manuscript.</desc>
             <content>
               <sequence>
                 <elementRef key="msIdentifier" minOccurs="1" 
@@ -509,6 +546,10 @@
                   maxOccurs="1"/>
               </sequence>
             </content>
+            <remarks>
+              <p>The number of msFrag element required is equivalent to the integer stored in the DB's Part_div_order. 
+                If value = 1, then only 1 msFrag.</p>
+            </remarks>
           </elementSpec>
          
           <!-- msContents -->
@@ -537,7 +578,7 @@
           <!-- locus -->
           
           <elementSpec ident="locus" mode="change">
-            <desc>locus identifies the location of the witness or witness fragment within the document. The element is equivalent to the DB's part_page_ranges.</desc>
+            <desc>locus identifies the location of the witness or witness fragment within the document.</desc>
             <attList>
               <attDef ident="from" mode="change">
                 <datatype>
@@ -550,6 +591,9 @@
                 </datatype>
               </attDef>
             </attList>
+            <remarks>
+              <p>The element stores the DB's Part_page_ranges.</p>
+            </remarks>
           </elementSpec>
 
           <!-- physDesc -->
@@ -732,8 +776,7 @@
               </attDef>
             </attList>
             <remarks>
-              <p>handNote is used to input the DB's attributes 'script_type'
-                and 'subscript_type'.</p>
+              <p>handNote is used to input the DB's attributes 'script_type'band 'subscript_type'.</p>
             </remarks>
           </elementSpec>
 
@@ -765,7 +808,7 @@
               </attDef>
             </attList>
             <remarks>
-              <p>The input data for decoDesc is equivalent to the DB's attributes 'has_decoration' and 'amount_of_illustration'.</p>
+              <p>The input data for decoDesc is equivalent to the DB's attributes has_decoration and amount_of_illustration.</p>
             </remarks>
           </elementSpec>
           
@@ -779,7 +822,7 @@
             </content>
             <remarks>
               <p>The element "digitization" is added as a direct child of the element surrogates to allow input equivalent to the database attribute 
-                document_table_digitization_freetext.</p>
+                DocumentTable_digitization_freetext.</p>
             </remarks>
           </elementSpec>
 
@@ -803,7 +846,7 @@
             </attList>
             <remarks>
               <p>The two children elements are used in order to receive the Heurist ID of the digitisation and
-                the URI, respectively equivalent to the database attributes "digitization_H-ID" and "digitization_URI".</p>
+                the URI, respectively equivalent to the database attributes Digitization_H-ID and Digitization_URI.</p>
             </remarks>
           </elementSpec>
 
@@ -821,7 +864,7 @@
                 </datatype>
                 <remarks>
                   <p>Allows to input the Heurist identification number of the repository's settlement,
-                    equivalent to the database attribute repository_city_H-ID.</p>
+                    equivalent to the database attribute Repository_city_H-ID.</p>
                 </remarks>
               </attDef>
             </attList>
@@ -834,6 +877,9 @@
             <content>
               <elementRef key="change" minOccurs="1" maxOccurs="unbounded"/>
             </content>
+            <remarks>
+              <p>It receives metadata from Heurist - extraction to be determined, not in the DB yet.</p>
+            </remarks>
           </elementSpec>
 
 
@@ -852,6 +898,9 @@
               </datatype>
             </attDef>
           </attList>
+            <remarks>
+              <p>It receives metadata from Heurist - extraction to be determined, not in the DB yet.</p>
+            </remarks>
           </elementSpec>
           
           
@@ -862,6 +911,9 @@
             <content>
               <elementRef key="editorialDecl"/>
             </content>
+            <remarks>
+              <p>It receives metadata from Heurist - extraction to be determined, not in the DB yet.</p>
+            </remarks>
           </elementSpec>
           
           <!-- editorialDecl -->
@@ -880,6 +932,9 @@
                <elementRef key="stdVals" minOccurs="0" maxOccurs="unbounded"/>
              </sequence>
             </content>
+            <remarks>
+              <p>It receives metadata from Heurist - extraction to be determined, not in the DB yet.</p>
+            </remarks>
           </elementSpec>
           
           
