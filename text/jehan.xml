@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href=xmlns="/Users/maudmelinand/Desktop/LostMa-divers/LostMa_ODD/out/text.rng"
+   type="application/xml" 
+   schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+
+<!--"/Users/maudmelinand/Desktop/LostMa-divers/LostMa_ODD/out/text.rng"-->
+<!-- Questions pour JBC 
+      1) Où mettre les stemmata ? Solution 1 = body/graph mais body n'est pas fait pour comporter de métadonnées
+                                  Solutuion 2 = TEI/standOff/graph 
+      2) A priori pas de code BCP47 pour les langues qu'on utilise : est-ce qu'on les indexe dans classDecl/taxonomy ? 
+      Marche bien et prévu pour mais verbeux (alourdit les fichiers)
+      
+      3) Info relatives aux verse type, rhyme type, stanza type - à vérifier -->
+
+<!-- pour le xml:id des textes, on va utiliser le préfixe hid_03849-->
+
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="hid_671">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title type="preferred">Jehan de Lanson</title>
+                <!-- ajout de l'Heurist ID pour le text dans @key mais à voir si on le met ailleurs ?  -->
+                <principal>
+                    <persName>
+                        <forename>Jean-Baptiste</forename>
+                        <surname>Camps</surname>
+                    </persName>
+                </principal>
+                <respStmt>  <!-- rien de tout ça n'est mappé car métadonnées Heurist qui ne sont pas dans la BDD - trouver comment les récupérer  -->
+                    <resp>Editor of the French corpus</resp>
+                    <persName xml:id="JBC">
+                        <forename>Jean-Baptiste</forename>
+                        <surname>Camps</surname>
+                    </persName>
+                </respStmt>
+                <respStmt>
+                    <resp>Data curator</resp>
+                    <persName xml:id="VR">
+                        <forename>Virgile</forename>
+                        <surname>Reignier</surname>
+                    </persName>
+                </respStmt>
+                <respStmt>
+                    <resp>Contributor</resp>
+                    <persName xml:id="EG">
+                        <forename>Émilie</forename>
+                        <surname>Guidi</surname>
+                    </persName>
+                </respStmt>
+            </titleStmt>
+            <publicationStmt> <!-- pas d'intérêt à conserver -->
+                <p>Cette publication est un test de conformité de l'ODD text.</p>
+            </publicationStmt>
+            <sourceDesc>
+                <p>
+                    <listWit> <!-- pas mappé car impossible de trouver ces données dans la BDD ? est-ce du côté du stemma ? -->
+                        <witness xml:id="athis_2">"Athis et Prophilias" (1201 to 1300) p, in ms Latin 16433</witness>
+                        <witness xml:id="athis_3">"Athis et Prophilias" (1201 to 1300) p, in ms Latin 16433</witness>
+                    </listWit>
+                    <listBibl>
+                        <bibl xml:id="Arlima">Archives de littérature du Moyen Âge.</bibl>
+                    </listBibl>
+                </p>
+            </sourceDesc>
+        </fileDesc>
+        <encodingDesc>
+            <classDecl>
+                <taxonomy xml:id="genre">
+                    <category xml:id="arthurian-romance">
+                        <desc>The genre of the text is arthurian romance.</desc>
+                    </category>
+                    <category xml:id="arthurroman">
+                        <desc>The genre of the text is arthurroman.</desc>
+                    </category>
+                    <category xml:id="carolingian-romance">
+                        <desc>The genre of the text is carolingian romance.</desc>
+                    </category>
+                    <category xml:id="karelepiek">
+                        <desc>The genre of the text is karelepiek.</desc>
+                    </category>
+                    <category xml:id="chanson-de-geste">
+                        <desc>The genre of the text is chanson de geste.</desc>
+                    </category>
+                    <category xml:id="chronique">
+                        <desc>The genre of the text is chronique.</desc>
+                    </category>
+                    <category xml:id="mise-en-prose">
+                        <desc>The genre of the text is mise en prose.</desc>
+                    </category>
+                    <category xml:id="roman">
+                        <desc>The genre of the text is roman.</desc>
+                    </category>
+                    <category xml:id="other">
+                        <desc>The genre of the text is other.</desc>
+                    </category>
+                    <!-- permet de gérer les nulls -->
+                    <category xml:id="genre-unknown">
+                        <desc>The genre of the text is unknown.</desc>
+                    </category>
+                </taxonomy>
+                <taxonomy xml:id="litterary-form">
+                    <category xml:id="vers">
+                        <desc>The litterary form of the text is verse.</desc>
+                    </category>
+                    <category xml:id="prose">
+                        <desc>The litterary form of the text is prose.</desc>
+                    </category>
+                    <category xml:id="mixed">
+                        <desc>The litterary form of the text is mixed.</desc>
+                    </category>
+                    <category xml:id="form-unknown">
+                        <desc>The litterary form of the text is unknown.</desc>
+                    </category>
+                </taxonomy>
+                <taxonomy xml:id="versification">
+                    <category xml:id="alexandrine"/>
+                    <category xml:id="decasyllabe"/>
+                    <category xml:id="hexasyllabe"/>
+                    <category xml:id="octosyllabe"/>
+                    <category xml:id="iambic"/>
+                    <category xml:id="petit-vers"/>
+                </taxonomy>
+                <taxonomy xml:id="rhyme">
+                    <category xml:id="aliteration"/>
+                    <category xml:id="full-rhyme"/>
+                    <category xml:id="assonance"/>
+                    <category xml:id="unknown"/>
+                </taxonomy>
+                <taxonomy xml:id="stanza">
+                    <category xml:id="null"/>
+                    <category xml:id="monorhyme"/>
+                    <category xml:id="laisse"/>
+                </taxonomy>
+            </classDecl>
+        </encodingDesc>
+        <profileDesc>
+            <langUsage>
+                <language ident="fro">fro (Old French) <!-- language renvoie à l'attribut text_language  -->
+                    <lang n="scripta">fr ?</lang> <!-- lang + @n renvoie à l'attribut scripta_freetext  -->
+                </language>
+            </langUsage>
+            <creation>
+                <date from="1201" to="1233" cert="unknown" source="Jonas">XII1/2 ou XIII?, 1212-1234; 1er tiers du 13e s. (Jonas, Arlima);</date>
+                <!-- Faut-il créer une liste de valeurs pour les sources et les déclarer dans listBibl ? -->x
+                <placeName source="Arlima">Tournai</placeName>
+            </creation>
+            <textClass>
+                <keywords>
+                    <term>verse</term>
+                </keywords>
+            </textClass>
+            <textClass>
+                <catRef scheme="#genre" target="roman"/>
+                <catRef scheme="#litterary-form" target="verse"/>
+                <catRef scheme="#versification" target="decasyllabe"/>
+                <catRef scheme="#rhyme" target="assoance"/>
+                <catRef scheme="#stanza" target="monoryhme"/>
+            </textClass>
+            <textDesc>
+                <channel>manuscript</channel>
+                <constitution>surviving</constitution>
+                <derivation corresp="athis_2">might derive from a lost Robert de Boron verse text</derivation>
+                <!-- utilisation de @corresp pour renvoyer à l'xml:id  texte lié -->
+                <domain/>
+                <factuality/>
+                <interaction/>
+                <preparedness/>
+                <purpose/>
+            </textDesc>
+            <particDesc>
+                <listPerson>
+                    <person role="author">
+                        <p>Bertolais de Laon, 1100 - 1200</p>
+                    </person>
+                </listPerson>
+            </particDesc>
+        </profileDesc>
+    </teiHeader>
+    <text>
+        <body>
+            <graph
+                xml:id="story-storyverse"
+                type="directed">
+                <label>Links between text, story and storyverse.</label>         
+                <node xml:id="text" type="text" inDegree="1" outDegree="1">
+                    <label>Alexandre en Orient</label>
+                </node>
+                <node xml:id="story" type="story" inDegree="1" outDegree="1">
+                    <label>Alexandre en Orient (branch III)</label>
+                </node>
+                <node xml:id="storyverse" type="storyverse" inDegree="1" outDegree="1">
+                    <label>Alexandrian</label>
+                </node>
+                <arc from="#story" to="#text">
+                    <label>is realised in</label>
+                </arc>
+                <arc from="#story" to="#storyverse">
+                    <label>is a member of</label>
+                </arc>
+            </graph>
+        </body>
+    </text>
+</TEI>

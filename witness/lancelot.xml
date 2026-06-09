@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="/Users/maudmelinand/Desktop/LostMa-divers/LostMa_ODD/witness/out/witness_v3.rng" 
+            type="application/xml" 
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="hid_54926">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title type="preferred">Lancelot</title>
+                <principal>
+                    <persName>
+                        <forename>Jean-Baptiste</forename>
+                        <surname>Camps</surname>
+                    </persName>
+                </principal>
+                <respStmt>
+                    <resp>Editor of the French corpus</resp>
+                    <persName xml:id="JBC">
+                        <forename>Jean-Baptiste</forename>
+                        <surname>Camps</surname>
+                    </persName>
+                </respStmt>
+                <respStmt>
+                    <resp>Data curator</resp>
+                    <persName xml:id="VR">
+                        <forename>Virgile</forename>
+                        <surname>Reignier</surname>
+                    </persName>
+                </respStmt>
+                <respStmt>
+                    <resp>Contributor</resp>
+                    <persName xml:id="EG">
+                        <forename>Émilie</forename>
+                        <surname>Guidi</surname>
+                    </persName>
+                </respStmt>
+            </titleStmt>
+            <publicationStmt>
+                <p>Cette publication est un test de conformité de l'ODD witness_v3.</p>
+            </publicationStmt>
+            <sourceDesc>
+                <msDesc type="citation">
+                    <msIdentifier>
+                        <idno type="heurist">54926</idno>
+                    </msIdentifier>
+                    <msFrag>
+                        <msIdentifier>
+                            <settlement>Paris</settlement>
+                            <repository  ref="http://viaf.org/viaf/137156173">Bibliothèque nationale de France</repository>
+                            <idno type="shelfmark">Latin 16433</idno>
+                            <altIdentifier type="old-shelfmark">
+                                <idno>Regius 1432</idno>
+                            </altIdentifier>
+                        </msIdentifier>
+                        <physDesc>
+                            <objectDesc>
+                                <supportDesc>
+                                    <support>Parchment</support>
+                                </supportDesc>
+                                <layoutDesc>
+                                    <layout writtenLines="42" columns="2">
+                                        <dimensions type="leaves">
+                                            <height unit="mm">244</height>
+                                            <width unit="mm">132</width>
+                                        </dimensions>
+                                        <dimensions type="written">
+                                            <height unit="mm" atLeast="158" atMost="165">160</height>
+                                            <width unit="mm" atLeast="115" atMost="125">120</width>
+                                        </dimensions>
+                                    </layout>
+                                </layoutDesc>
+                            </objectDesc>
+                            <handDesc>
+                                <handNote script="praegothica"/>
+                            </handDesc>
+                            <decoDesc>
+                                <decoNote type="rubrication"></decoNote>
+                                
+                            </decoDesc>
+                        </physDesc>
+                        <msContents>
+                            <msItemStruct>
+                                <locus from="12" to="23">Renvoie à part_page_ranges.</locus>
+                                <author>Chrétien de Troyes</author>
+                                <title>Le chevalier au lion</title>
+                                <note></note>
+                            </msItemStruct>
+                        </msContents>
+                        <additional>
+                            <surrogates>
+                                <bibl type="digitisation">
+                                    <idno type="IIIF"></idno>
+                                    <ptr/>
+                                </bibl>
+                            </surrogates>
+                        </additional>
+                    </msFrag>
+                </msDesc>
+            </sourceDesc>
+        </fileDesc>
+        <encodingDesc>
+            <editorialDecl><!-- ¨Pour prévoir l'avenir, il faudra songer à comment signaler ça, qui concerne le plein texte -->
+                <correction>
+                    <p></p>
+                </correction>
+                <hyphenation>
+                    <p></p>
+                </hyphenation>
+                <interpretation>
+                    <p></p>
+                </interpretation>
+                <normalization>
+                    <p></p>
+                </normalization>
+            </editorialDecl>
+        </encodingDesc>
+        <profileDesc>
+            <langUsage>
+                <language ident="fro">fro-orient-bourg
+                    <lang n="regional">Vlaams, dum (Middle Dutch)</lang>
+                    <lang n="scripta">frc.: Paris -- Paris prob. 1318 -- Source: DÉAF</lang>
+                </language> 
+            </langUsage>
+            <creation>
+                <date notBefore="1201" notAfter="1300" source="Jonas" cert="unknown">XIIIe siècle</date>
+            </creation>
+        </profileDesc>
+        <revisionDesc>
+            <change who="#EG" when="20251002"></change><!-- See the level of information we can have here -->
+            <change who="#JBC" when="20250413"></change>
+        </revisionDesc>
+    </teiHeader>
+    <text>
+        <body>
+            <p>
+                <!-- Ici sera ajouté l'HTR du témoin -->
+            </p>
+        </body>
+    </text>
+</TEI>

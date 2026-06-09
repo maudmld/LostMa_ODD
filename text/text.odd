@@ -135,6 +135,9 @@
                 </datatype>
               </attDef>
             </attList>
+            <remarks>
+               <p>Correspond's to the DB's TextTable_preferred_name.</p>
+            </remarks>
           </elementSpec>
           
           <!-- principal -->
