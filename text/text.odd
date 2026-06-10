@@ -136,7 +136,7 @@
               </attDef>
             </attList>
             <remarks>
-               <p>Correspond's to the DB's TextTable_preferred_name.</p>
+               <p>Equivalent to the DB's TextTable_preferred_name.</p>
             </remarks>
           </elementSpec>
           
@@ -147,6 +147,9 @@
             <content>
               <elementRef key="persName" minOccurs="1" maxOccurs="1"/>
             </content>
+            <remarks>
+              <p>This element will store Heurist metadata once extracted.</p>
+            </remarks>
           </elementSpec>
           
           <!-- persName -->
@@ -159,6 +162,9 @@
                 <elementRef key="surname" minOccurs="1" maxOccurs="1"/>
               </sequence>
             </content>
+            <remarks>
+              <p>This element will store Heurist metadata once extracted.</p>
+            </remarks>
           </elementSpec>
           
           <!-- respStmt -->
@@ -171,12 +177,47 @@
                 <elementRef key="persName" minOccurs="1" maxOccurs="unbounded"/>
               </sequence>
             </content>
+            <remarks>
+              <p>This element will store Heurist metadata once extracted.</p>
+            </remarks>
+          </elementSpec>
+          
+          <!-- sourceDesc -->
+          
+          <elementSpec ident="sourceDesc" mode="change">
+            <content>
+              <elementRef key="listWit" minOccurs="0" maxOccurs="1"/>
+            </content>
+          </elementSpec>
+          
+          <!-- listWit -->
+          
+          <elementSpec ident="listWit" mode="change">
+            <desc>Describes the list of witnesses of a text.</desc>
+            <content>
+              <elementRef key="witness" minOccurs="0" maxOccurs="unbounded"/>
+            </content>
+          </elementSpec>
+          
+          <!-- witness -->
+          
+          <elementSpec ident="witness" mode="change">
+            <desc>Witness describes the witness related to the text.</desc>
+            <content>
+              <textNode/>
+            </content>
+            <attList>
+              <attDef ident="xml:id" mode="change" usage="rec">
+                 <datatype>
+                    <dataRef name="ID"/>
+                  </datatype>
+              </attDef>
+            </attList>
           </elementSpec>
           
           <!-- encodingDesc -->
           
           <elementSpec ident="encodingDesc" mode="change">
-            <desc>The element is used </desc>
             <content>
               <sequence>
                <elementRef key="classDecl" minOccurs="1" maxOccurs="unbounded"/>
@@ -210,7 +251,8 @@
             </attList>
             <remarks>
               <p>The element taxonomy is used in order to deal with a few categories that doesn't translate canonically in TEI.</p>
-              <p>Multiples types are used in these files : genre, litterary forme, versification, rhymes and stanza.</p>
+              <p>The @xml:id stores the name of different taxonomies : genre, litterary forme, versification, rhymes and stanza.</p>
+              <p>Each of theses categories of taxonomy can be declared one by one within their own taxonomy element.</p>
             </remarks>
           </elementSpec>
           
@@ -229,20 +271,17 @@
             </attDef>
           </attList>
           <remarks>
-            <p></p>
+            <p>The @xml:id stores the different categories of a taxonomy.</p>
+            <p>For genre : arthurian-romance, arthurroman, carolingian-romance, karelepiek, chanson-de-geste, chronique,
+              mise-en-prose, roman, other and unknown. They are equivalent to the DB's Genre_preferred_name.</p>
+            <p>For litterary form : vers, prose, mixte, form-unknown. They are equivalent to the DB's TextTable_literary_form.</p>
+            <p>For versification : alexandrine, decasyllabe, hexasyllabe, octosyllabe, iambic, petit-vers. They are equivalent
+            to the DB's TextTable_verse_type.</p>
+            <p>For rhyme : aliteration, full-rhyme, assonance, unknown. They are equivalent to the DB's TextTable_rhyme_type.</p>
+            <p>For stanza : null, monoryhme, laisse. They are equivalent to the DB's TextTable_stanza_type.</p>
           </remarks>
           </elementSpec>
-          
-          <!-- metDecl -->
-          
-          <elementSpec ident="metDecl" mode="change">
-            <desc></desc>
-            <content>
-              <elementRef key="metSym" minOccurs="0" maxOccurs="unbounded"/>
-            </content>
-          </elementSpec>
-          
-         
+
           <!-- profileDesc -->
           
           <elementSpec ident="profileDesc" mode="change">
@@ -290,7 +329,7 @@
             </attDef>
             </attList>
             <remarks>
-              <p>Allow the input of DB's attribute text_language</p>
+              <p>Allow the input of DB's attribute Text_language</p>
             </remarks>
           </elementSpec>
           
@@ -310,7 +349,7 @@
               </attDef>
             </attList>
             <remarks>
-              <p>Allow the input of DB's attribute regional_writing_style (for @n=regional) and scripta_freetext (for @n=scripta)</p>
+              <p>Allow the input of DB's attribute TextTable_regional_writing_style (for @n=regional) and TextTable_scripta_freetext (for @n=scripta)</p>
             </remarks>
           </elementSpec>
           
