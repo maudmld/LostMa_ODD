@@ -7,19 +7,21 @@
 <!--"/Users/maudmelinand/Desktop/LostMa-divers/LostMa_ODD/out/text.rng"-->
 <!-- Questions pour JBC 
       1) Où mettre les stemmata ? Solution 1 = body/graph mais body n'est pas fait pour comporter de métadonnées
-                                  Solutuion 2 = TEI/standOff/graph 
-      2) A priori pas de code BCP47 pour les langues qu'on utilise : est-ce qu'on les indexe dans classDecl/taxonomy ? 
-      Marche bien et prévu pour mais verbeux (alourdit les fichiers)
+                                  Solution 2 = TEI/standOff/graph 
+      2) Author ou person + @role ? 
       
-      3) Info relatives aux verse type, rhyme type, stanza type - à vérifier -->
-      
-      <!-- pour le xml:id des textes, on va utiliser le préfixe hid_03849-->
+   
+      pour le xml:id des textes, on va utiliser le préfixe hid_03849 -->
 
 <TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="hid_03849">
    <teiHeader>
       <fileDesc>
          <titleStmt>
             <title type="preferred">[fragmentary] fro (Old French) Lambert le Tort, "Alexandre en Orient" (verse alexandrine full rhyme, 1165 to 1200)</title>
+            <author>Lambert le Tort, 1101 - 1150 
+               <note>Two dubious attributions, perhaps matching the two separate versions: Graindor de Brie 
+                  and Guillaume de Bapaume</note>
+            </author>
             <!-- ajout de l'Heurist ID pour le text dans @key mais à voir si on le met ailleurs ?  -->
             <principal>
                <persName>
@@ -179,7 +181,7 @@
             <catRef scheme="#stanza" target="monoryhme"/>
          </textClass>
          <textDesc>
-            <channel>manuscript</channel>
+            <channel></channel>
             <constitution>fragmentary</constitution>
             <derivation corresp="athis_2">might derive from a lost Robert de Boron verse text</derivation>
             <!-- utilisation de @corresp pour renvoyer à l'xml:id  texte lié -->
@@ -191,6 +193,7 @@
          </textDesc>
          <particDesc>
             <listPerson>
+               <!-- rajouter un author + role dans le header à la place d'ici ? -->
                <person role="author">
                   <p>Lambert le Tort, 1101 - 1150</p>
                </person>

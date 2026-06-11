@@ -112,6 +112,7 @@
             <content>
               <sequence>
                 <elementRef key="title" minOccurs="1" maxOccurs="unbounded"/>
+                <elementRef key="author" minOccurs="0" maxOccurs="unbounded"/>
                 <elementRef key="principal" minOccurs="1" maxOccurs="1"/>
                 <elementRef key="respStmt" minOccurs="1" maxOccurs="unbounded"/>
               </sequence>
@@ -139,6 +140,22 @@
                <p>Equivalent to the DB's TextTable_preferred_name.</p>
             </remarks>
           </elementSpec>
+          
+          <!-- author -->
+          
+          <elementSpec ident="author" mode="change">
+            <content>
+              <sequence>
+                <textNode/>
+                <elementRef key="note" minOccurs="0" maxOccurs="unbounded"/>
+              </sequence>
+            </content>
+            <remarks>
+              <p>The element author receives as input the data from the DB's TextTable_is_written_by Name.</p>
+              <p>The child-element note receives as input the DB's TextTable_author_freetext. </p>
+            </remarks>
+          </elementSpec>
+          
           
           <!-- principal -->
           
@@ -213,6 +230,12 @@
                   </datatype>
               </attDef>
             </attList>
+            <remarks>
+              <p>The witness element can be used to link the text to its witnesses. The @xml:id is required in order
+              to input the witness's id. In the data release, the link between a text and its witnesses is modelised by 
+              a coupling text_H-ID/witness_H-ID. The number of time a text_H-ID is cited within a pair is the number of
+              witnesses a text has.</p>
+            </remarks>
           </elementSpec>
           
           <!-- encodingDesc -->
@@ -224,6 +247,10 @@
                <elementRef key="metDecl" minOccurs="0" maxOccurs="unbounded"/>
               </sequence>
             </content>
+            <remarks>
+              <p>The metDecl element is of no use for this phase of the project but its future cases of use are 
+              anticipated.</p>
+            </remarks>
           </elementSpec>
           
           <!-- classDecl -->
@@ -419,7 +446,7 @@
               </attDef>
             </attList>
             <remarks>
-              <p>This element is absent from the release but exists in the Heurist modeL.</p>
+              <p>This element is absent from the release but exists in the Heurist modeL (Place_place_of_creation).</p>
             </remarks>
           </elementSpec>
           
@@ -446,6 +473,19 @@
             <content>
               <elementRef key="term"/>
             </content>
+          </elementSpec>
+          
+          <!-- term -->
+          
+          <elementSpec ident="term" mode="change">
+            <desc></desc>
+            <content>
+              <textNode/>
+            </content>
+            <remarks>
+              <p>The term element is used to input the DB's TextTable_literary_form. It can takes three values : mixed,
+              prose, verse.</p>
+            </remarks>
           </elementSpec>
           
           <!-- catRef -->
@@ -485,11 +525,9 @@
               </sequence>
             </content>
             <remarks>
-              <p>Only the element channel, constitution and derivation are used but the rest is kept in order to 
-                be TEI's guidelines compliant.</p>
-              <p>Channel element stores ??</p>
-              <p>Constitutions stores the DB's Witness_status_witness.</p>
-              <p>Derivation stores the DB's TextTable_is_derived_from H-ID and TextTable_nature_of_derivations.</p>
+              <p>Only the elements constitution and derivation are used but the rest is kept in order to be TEI's guidelines compliant.</p>
+              <p>The constitution element stores the DB's Witness_status_witness.</p>
+              <p>The derivation element stores the DB's TextTable_is_derived_from H-ID and TextTable_nature_of_derivations.</p>
             </remarks>
           </elementSpec>
           
@@ -543,6 +581,10 @@
                 <desc></desc>
               </attDef>
             </attList>
+            <remarks>
+              <p>The @role is used to specify that this person is the author of the text. The p element stores the 
+              DB's </p>
+            </remarks>
           </elementSpec>
           
           
